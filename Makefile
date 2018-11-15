@@ -21,7 +21,7 @@ NAME	=	bsq
 
 INCLUDE	=	 -I include/
 
-all: $(NAME)
+all:	$(NAME)
 
 $(NAME):	$(OBJ) $(OBJM)
 	gcc -o $(NAME) $(OBJ) $(OBJM) $(INCLUDE)
