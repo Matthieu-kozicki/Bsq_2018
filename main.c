@@ -15,26 +15,24 @@
 
 char **mem_alloc_2d_array(int nb_rows, int nb_cols)
 {
-    int i;
-    char **result = malloc(sizeof(char *) * nb_cols + 2);
+    int i = 0;
+    char **result = malloc(sizeof(char *) * (nb_cols + 2));
 
-
+    result[nb_cols + 1] = NULL;
     for (i = 0; i <= nb_rows; i++) {
-        result[i] = malloc(sizeof(char *) * nb_rows + 2);
+        result[i] = malloc(sizeof(char*) * (nb_rows + 2));
+        result[i][nb_rows + 1] = '\0';
     }
     return (result);
 }
 
-int **int_alloc_2d_array(int nb_rows, int nb_cols)
+void free_2d(char **str, int nb_rows, int nb_cols)
 {
-    int i;
-    int **result = malloc(sizeof(int *) * nb_cols + 2);
+    int i = 0;
 
-
-    for (i = 0; i <= nb_rows; i++) {
-        result[i] = malloc(sizeof(int *) * nb_rows + 2);
-    }
-    return (result);
+    for (i = 0; i <= nb_rows; i++)
+        free(str[i]);
+    free(str);
 }
 
 char **load_2d_arr_from_file(char *str, int nb_rows, int nb_cols)
@@ -131,12 +129,13 @@ char **bq(char **str, int rows, int cols)
     int hight = 2;
     int lon = 1;
     int k = 1;
-    big a;
+    big a = {48, 0, 0};
 
     while (hight < rows) {
         while (str[hight][k] != '\n') {
             if (str[hight][k] == '1') {
-                str[hight][k] = bsq(str[hight][k-1], str[hight-1][k-1], str[hight-1][k]);
+                str[hight][k] = bsq(str[hight][k-1],
+                                    str[hight-1][k-1], str[hight-1][k]);
                 big_int(str[hight][k], hight, k, &a);
             }
             k = k + 1;
@@ -166,5 +165,6 @@ int main(int arc, char **arg)
     char **copy = mem_alloc_2d_array(rows, cols);
     copy = load_2d_arr_from_file(buff, rows, cols);
     bq(copy, rows, cols);
+    free_2d(copy, rows, cols);
     return (0);
 }
