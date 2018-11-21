@@ -31,9 +31,9 @@ int get_cols(char *str)
         h = h + 1;
     h = h + 1;
     while (k < 2) {
-	if (str[j] == '\n')
+        if (str[j] == '\n')
             k = k + 1;
-	j = j + 1;
+        j = j + 1;
     }
     j = j - h;
     return (j);
