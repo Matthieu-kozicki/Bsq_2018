@@ -9,7 +9,8 @@ SRC	=	my_putstr.c \
 		my_strlen.c \
 		my_putchar.c \
 		my_put_nbr.c \
-		get_line.c
+		get_line.c \
+		other_function.c
 
 SRCM	=	main.c
 

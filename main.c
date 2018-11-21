@@ -13,23 +13,6 @@
 #include "my.h"
 #include <stdio.h>
 
-char bsq(char x, char y, char z)
-{
-    char n = 0;
-
-    if (x == 'o' || y == 'o' || z == 'o') {
-        n = '1';
-        return (n);
-    }
-    if (x <= y && x <= z)
-        n = x + 1;
-    if (y <= x && y <= z)
-        n = y + 1;
-    if (z <= x && z <= y)
-    n = z + 1;
-    return (n);
-}
-
 void big_int(char pos, int hight, int k, big *a)
 {
     if(pos > a->pos) {
@@ -62,22 +45,24 @@ char **put_x(char **str, big *a)
     return (str);
 }
 
-char **show_square(char **str, int rows, int cols)
+char **except(char **str, int rows, int cols)
 {
-    int hight = 1;
-    int lon = 1;
-    int k = 0;
+    int i = 0;
 
-    while (hight < rows) {
-        while (str[hight][k] != '\n') {
-            if (str[hight][k] != 'o' && str[hight][k] != 'x')
-                str[hight][k] = '.';
-            k = k + 1;
-        }
-        my_putstr(str[hight]);
-        k = 0;
-        hight = hight + 1;
+    if (rows > 2 && cols > 2)
+        return (str);
+    if (rows == 2) {
+        while (str[1][i] != '1')
+            i++;
+        str[1][i] = 'x';
     }
+    if (cols == 2) {
+        while (str[i][0] != '1') {
+            i++;
+        }
+        str[i][0] = 'x';
+    }
+    return (str);
 }
 
 char **bq(char **str, int rows, int cols)
@@ -100,19 +85,20 @@ char **bq(char **str, int rows, int cols)
         hight = hight + 1;
     }
     str = put_x(str, &a);
+    str = except(str, rows, cols);
     show_square(str, rows, cols);
 }
 
 int main(int arc, char **arg)
 {
     char buff[2000000];
-    int fd = 0;
+    int fd = open(arg[1], O_RDONLY);
     int rows;
     int count;
     int cols;
 
     fd = open(arg[1], O_RDONLY);
-    count = read(fd, buff, 1000000);
+    count = read(fd, buff, 100000000);
     buff[count+1] = '\0';
     close(fd);
     rows = get_line(buff);
