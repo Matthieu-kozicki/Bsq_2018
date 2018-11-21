@@ -14,6 +14,9 @@ int get_cols(char *str);
 int get_line(char *str);
 void my_putstr(char const *str);
 int my_strlen(char const *str);
+char **mem_alloc_2d_array(int nb_rows, int nb_cols);
+void free_2d(char **str, int nb_rows, int nb_cols);
+char **load_2d_arr_from_file(char *str, int nb_rows, int nb_cols);
 
 typedef struct big {
     char pos;

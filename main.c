@@ -13,50 +13,6 @@
 #include "my.h"
 #include <stdio.h>
 
-char **mem_alloc_2d_array(int nb_rows, int nb_cols)
-{
-    int i = 0;
-    char **result = malloc(sizeof(char *) * (nb_rows + 2));
-
-    result[nb_rows + 1] = NULL;
-    for (i = 0; i <= nb_rows; i++) {
-        result[i] = malloc(sizeof(char) * (nb_cols + 2));
-        result[i][nb_rows + 1] = '\0';
-    }
-    return (result);
-}
-
-void free_2d(char **str, int nb_rows, int nb_cols)
-{
-    int i = 0;
-
-    for (i = 0; i <= nb_rows; i++)
-        free(str[i]);
-    free(str);
-}
-
-char **load_2d_arr_from_file(char *str, int nb_rows, int nb_cols)
-{
-    int hight = 0;
-    int lon = 1;
-    char **copy = mem_alloc_2d_array(nb_rows, nb_cols);
-    int k = 0;
-
-    while (hight < nb_rows) {
-        while (str[k] != '\n') {
-            if (str[k] == '.')
-                copy[hight][lon] = 1 + '0';
-            else copy[hight][lon] = str[k];
-            lon = lon + 1;
-            k = k + 1;
-        }
-        copy[hight][lon] = '\n';
-        lon = 0;
-        hight = hight + 1;
-        k = k + 1;
-    }
-    return (copy);
-}
 char bsq(char x, char y, char z)
 {
     char n = 0;
