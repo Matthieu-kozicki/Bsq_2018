@@ -10,7 +10,7 @@
 int main(int arc, char **arg)
 {
     if (arc != 2) {
-        my_putstr("Error");
+        my_putstr("Error\n");
         return (84);
     }
     if (arg[1][0] == '-' && arg[1][1] == 'h') {
