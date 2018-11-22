@@ -91,14 +91,16 @@ char **bq(char **str, int rows, int cols)
 
 int the_bsq(int arc, char **arg)
 {
-    char buff[2000000];
+    struct stat x;
+    stat(arg[1], &x);
+    char buff[x.st_size];
     int fd = open(arg[1], O_RDONLY);
     int rows;
     int count;
     int cols;
 
     fd = open(arg[1], O_RDONLY);
-    count = read(fd, buff, 100000000);
+    count = read(fd, buff, x.st_size);
     buff[count+1] = '\0';
     close(fd);
     rows = get_line(buff);
