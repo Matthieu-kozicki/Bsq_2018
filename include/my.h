@@ -9,6 +9,7 @@
 #define MY_H
 
 void my_putchar(char c);
+int the_bsq(int arc, char **arg);
 int my_put_nbr(int nb);
 int get_cols(char *str);
 int get_line(char *str);

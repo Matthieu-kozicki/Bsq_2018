@@ -89,7 +89,7 @@ char **bq(char **str, int rows, int cols)
     show_square(str, rows, cols);
 }
 
-int main(int arc, char **arg)
+int the_bsq(int arc, char **arg)
 {
     char buff[2000000];
     int fd = open(arg[1], O_RDONLY);

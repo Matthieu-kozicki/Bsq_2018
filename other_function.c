@@ -7,6 +7,23 @@
 
 #include "my.h"
 
+int main(int arc, char **arg)
+{
+    if (arc != 2) {
+        my_putstr("Error");
+        return (84);
+    }
+    if (arg[1][0] == '-' && arg[1][1] == 'h') {
+        my_putstr("USAGE\n   ./bsq map\n");
+        my_putstr("DESCRIPTION\n   map");
+        my_putstr(" with number of line at the first line\n");
+        my_putstr("   '.' representing an empty place");
+        my_putstr(" and 'o' representing an obstacle\n");
+        return (84);
+    }
+    the_bsq(arc, arg);
+}
+
 char bsq(char x, char y, char z)
 {
     char n = 0;
